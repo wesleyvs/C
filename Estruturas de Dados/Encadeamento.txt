@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct CELULA {
+    int valor;
+    struct CEL *prox;
+} CEL;
+
+int main()
+{
+    CEL A, B;
+
+    A.valor=2;
+    A.prox=NULL;
+
+    B.valor=3;
+    B.prox=NULL;
+
+    A.prox = &B;
+
+    printf("%d", A.prox=B.valor);
+
+    /*CEL *P;
+    P=malloc(sizeof(CEL));
+    P->valor=1;
+    P->prox=NULL;
+
+    CEL *P2;
+    P2=malloc(sizeof(CEL));
+    P2->valor=2;
+    P2->prox=NULL;
+
+    P->prox=P2;*/
+
+    return 0;
+}

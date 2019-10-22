@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct CELULA {
+    int valor;
+    struct CEL *proximo;
+}CEL;
+
+void remover(CEL *p, int indice)
+{
+   CEL *lixo;
+   int checar=0;
+
+   while(p!=NULL) {
+        if (checar == indice) {
+            lixo = p->proximo;
+            p->proximo = lixo->proximo;
+            free (lixo);
+            break;
+        }
+        checar++;
+        p=p->proximo;
+    }
+}
+
+void Mostrar(CEL *p){
+    int cont=0;
+    printf("Endereco de memoria da cabeca: %d\n", p);
+    p=p->proximo;
+    while(p!=NULL) {
+        printf("Valor %d da lista: %d | memoria: %d\n", cont, p->valor, p);
+        p=p->proximo;
+        cont++;
+    }
+}
+
+void Inserir(CEL *p, int x){
+    while(p->proximo!=NULL) {p=p->proximo;}
+    CEL *P1;
+    P1=malloc(sizeof(CEL));
+    P1->valor=x;
+    P1->proximo=NULL;
+    p->proximo=P1;
+}
+
+int main()
+{
+    CEL *LST;
+    LST=malloc(sizeof(CEL));
+    LST->proximo=NULL;
+
+    int vetor[3] = {12,21,36};
+    for(int i=0;i<3;i++){Inserir(LST, vetor[i]);}
+
+    int indice;
+    Mostrar(LST);
+    printf("\nQual indice deseja remover da lista(0~2): ");scanf("%d", &indice);
+    remover(LST, indice);
+    printf("\nRemovido!!\n\n");
+    Mostrar(LST);
+    return 0;
+}

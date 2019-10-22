@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    char vet[7] = {'a','b','z','x','u','v','f'};
+
+    int aux=0;
+    int maior=0;
+
+    for (int i=6; i>0; i--) {
+        maior = i;
+        for(int j=0; j<i; j++) {
+            if (vet[maior] < vet[j]) {
+                maior = j;
+            }
+        }
+        aux = vet[i];
+        vet[i] = vet[maior];
+        vet[maior] = aux;
+    }
+
+    printf("Valores: \n");
+    for(int i=0;i<=6;i++){
+        printf("%c\n" , vet[i]);
+    }
+    return 0;
+}

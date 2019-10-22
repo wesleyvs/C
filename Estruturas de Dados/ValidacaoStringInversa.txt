@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct CELULA {
+    char valor;
+    struct CEL *proximo;
+}CEL;
+
+
+void mostrar(CEL *show) {
+    show=show->proximo;
+    while (show != NULL) {
+        printf("%c", show->valor);
+        show=show->proximo;
+    }
+}
+void remover(CEL *Topo)
+{
+    CEL *lixo;
+    lixo = Topo->proximo;
+    Topo->proximo = lixo->proximo;
+    free (lixo);
+}
+
+void Inserir(CEL *p, char x){
+    CEL *aux;
+    aux=malloc(sizeof(CEL));
+    aux->valor=x;
+    aux->proximo=p->proximo;
+    p->proximo=aux;
+}
+
+void validar (CEL *p, char string[], int aux) {
+    int cont=0;
+    int cont2=0;
+    CEL *lixo;
+    lixo = p->proximo;
+
+    for (aux; aux <strlen(string); aux++) {
+        if (lixo->valor==string[aux]) {
+            remover(p);
+        }
+        lixo = p->proximo;
+    }
+
+    if (lixo == NULL) {
+        printf("String inversamente igual!");
+    } else {
+        printf("String inversamente diferente!");
+    }
+}
+
+int main()
+{
+    CEL *LST;
+    LST=malloc(sizeof(CEL));
+    LST->proximo=NULL;
+
+    char string[15];
+    int aux=0;
+
+    strcpy(string, "ABCCB @ BCCBA");
+
+    for (int i=0;i<strlen(string); i++){
+        Inserir(LST, string[i]);
+        if (string[i+2]=='@') {
+                aux = i+4;
+                break;
+        }
+    }
+    validar(LST, string, aux);
+    return 0;
+}

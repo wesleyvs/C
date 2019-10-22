@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int vet[8] ={9,7,4,8,5,1,2,6};
+    int ind=0;
+    int aux=0;
+
+    for (int i=1;i<(sizeof(vet)/sizeof(vet[0]));i++) {
+        ind = i;
+        aux=vet[ind];
+        while (ind > 0 && vet[ind-1] > aux) {
+            vet[ind] = vet[ind-1];
+            ind--;
+        }
+        vet[ind] = aux;
+    }
+
+    for(int i=0; i<8;i++) {
+        printf("%d ", vet[i]);
+    }
+
+    return 0;
+}
